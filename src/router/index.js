@@ -16,7 +16,7 @@ let router = new Router({
   routes: [
       {path: '/account', name: 'account', component: account },
       {path: '/oauth/url', name: 'oauthUrl', component: oauthUrl },
-    	{path: '/oauth/callback', name: 'oauthUrl', component: oauthCallback },
+    	{path: '/oauth/callback', name: 'oauthCallback', component: oauthCallback },
     	{path: '/benefits', name: 'benefits', component: benefits },
     	{path: '/insure', name: 'insure', component: insure },
     	{path: '/', name: 'index', component: index },
