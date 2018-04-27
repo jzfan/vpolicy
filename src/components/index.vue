@@ -15,17 +15,6 @@
 				其他信息：消息，技巧 ......
 			</p>
 		</div>
-		<button v-on:click="show = !show">
-		  Toggle
-		</button>
-			<div>
-		<transition name="fade">
-				<div v-if="show">
-					
-		  <p>hello</p>
-				</div>
-		</transition>
-			</div>
 	</div>
 </template>
 

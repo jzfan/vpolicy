@@ -6,6 +6,9 @@ import benefits from '@/components/benefits'
 import oauthUrl from '@/components/oauth/url'
 import oauthCallback from '@/components/oauth/callback'
 import account from '@/components/account'
+import charge from '@/components/charge'
+import fc3dInsure from '@/components/fc3dInsure'
+import ssqInsure from '@/components/ssqInsure'
 import store from '../store'
 
 Vue.use(Router)
@@ -14,6 +17,9 @@ let router = new Router({
   linkExactActiveClass: 'has-text-primary',
   mode: 'history', 
   routes: [
+      {path: '/ssqInsure', name: 'ssqInsure', component: ssqInsure },
+      {path: '/fc3dInsure', name: 'fc3dInsure', component: fc3dInsure },
+      {path: '/charge', name: 'charge', component: charge },
       {path: '/account', name: 'account', component: account },
       {path: '/oauth/url', name: 'oauthUrl', component: oauthUrl },
     	{path: '/oauth/callback', name: 'oauthCallback', component: oauthCallback },

@@ -8,12 +8,16 @@ export default new Vuex.Store({
 	  user: {
 	  	api_token: null
 	  },
-	  path: null
+	  path: null,
+	  code: null
 	},
 	mutations: {
 	  setUser (state, user) {
 	  	localStorage.setItem('user', JSON.stringify(user))
 	    state.user = user
+	  },
+	  selectedCode (state, code) {
+	  	state.code = code
 	  }
 	}
 })

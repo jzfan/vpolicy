@@ -2,9 +2,7 @@
 	<section class="hero is-primary">
 		<div class="hero-body">
 		    <div class="container has-text-centered">
-		    	<figure class="image has-text-centered">
 		    	<img :src="user.avatar" class="is-30x30">
-		    	</figure>
 		      <h2 class="subtitle">
 		        {{ user.name }}
 		      </h2>
