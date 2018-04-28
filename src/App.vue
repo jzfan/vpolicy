@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="has-navbar-fixed-top">
     <hero :is=heroCurrent></hero>
-    <div class="section">
+    <div style="padding: 1.5rem">
       <div class="container">
         <router-view/>
       </div>
@@ -31,5 +31,6 @@ export default {
 <style lang='sass'>
 @import '../node_modules/bulma/bulma.sass'
 </style>
+
 
 

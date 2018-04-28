@@ -1,10 +1,10 @@
 <template>
 	<nav class="level navbar is-fixed-bottom is-mobile has-text-centered">
 		<div class="level-item" @click='closeDropdown'>
-			<router-link to="/" class="has-text-dark">号码分析</router-link>
+			<router-link to="/" class="has-text-dark">历史分析</router-link>
 		</div>
 		<div class="level-item" @click='closeDropdown'>
-			<router-link to="/insure" class="has-text-dark">号码投保</router-link>
+			<router-link to="/insure" class="has-text-dark">预测红包</router-link>
 		</div>
 		<div class="level-item dropdown is-up is-right is-active">
 
