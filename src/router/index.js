@@ -9,6 +9,7 @@ import account from '@/components/account'
 import charge from '@/components/charge'
 import fc3dInsure from '@/components/fc3dInsure'
 import ssqInsure from '@/components/ssqInsure'
+import policiesList from '@/components/policiesList'
 import store from '../store'
 
 Vue.use(Router)
@@ -17,6 +18,7 @@ let router = new Router({
   linkExactActiveClass: 'has-text-primary',
   mode: 'history', 
   routes: [
+      {path: '/policiesList', name: 'policiesList', component: policiesList },
       {path: '/ssqInsure', name: 'ssqInsure', component: ssqInsure },
       {path: '/fc3dInsure', name: 'fc3dInsure', component: fc3dInsure },
       {path: '/charge', name: 'charge', component: charge },

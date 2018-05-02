@@ -1,5 +1,9 @@
 import axios from './axios'
 import store from './store'
+function getExpect(cb) {
+	axios.get('/expects')
+		.then(res => cb(res.data))
+}
 function authHeader() {
 	let api_token = store.state.user.api_token
 	return {
@@ -11,6 +15,10 @@ function getPolicy(code, cb) {
 		.then(res => {
 			cb(res.data)
 		})
+}
+function getPoliciesList(cb) {
+	axios.get('/policies', authHeader())
+		.then(res => cb(res.data))
 }
 function createPolicy(code, number, cb) {
 	axios.post('/policies', {code: code, number: number}, authHeader())
@@ -27,5 +35,7 @@ function activePolicy(code, id, cb) {
 export {
 	createPolicy,
 	activePolicy,
-	getPolicy
+	getPolicy,
+	getExpect,
+	getPoliciesList
 }

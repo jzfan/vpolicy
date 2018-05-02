@@ -9,7 +9,8 @@ export default new Vuex.Store({
 	  	api_token: null
 	  },
 	  path: null,
-	  code: null
+	  code: null,
+	  expect: []
 	},
 	mutations: {
 	  setUser (state, user) {
@@ -18,6 +19,13 @@ export default new Vuex.Store({
 	  },
 	  selectedCode (state, code) {
 	  	state.code = code
+	  },
+	  setExpect(state, data) {
+	  	state.expect = data
+	  },
+	  ticketUsed(state) {
+	  	state.user.tickets_qty -= 1
+	  	state.user.tickets_used += 1
 	  }
 	}
 })

@@ -1,23 +1,33 @@
 <template>
 	<nav class="level navbar is-fixed-bottom is-mobile has-text-centered">
 		<div class="level-item" @click='closeDropdown'>
-			<router-link to="/" class="has-text-dark">历史分析</router-link>
+			<router-link to="/" class="has-text-dark"><span class="icon">
+  <i class="fas fa-list-ul"></i>
+</span>历史分析</router-link>
 		</div>
 		<div class="level-item" @click='closeDropdown'>
-			<router-link to="/insure" class="has-text-dark">预测红包</router-link>
+			<router-link to="/insure" class="has-text-dark"><span class="icon">
+  <i class="fas fa-dollar-sign"></i>
+</span>预测红包</router-link>
 		</div>
 		<div class="level-item dropdown is-up is-right is-active">
 
 			<div class="dropdown-trigger" @click='openDropdown'>
-				<span :class='[dropdownActive ? "has-text-primary" : "has-text-dark"]'>号码福利</span>
+				<span :class='[dropdownActive ? "has-text-primary" : "has-text-dark"]'><span class="icon">
+  <i class="fas fa-user"></i>
+</span>号码福利</span>
 			</div>
 			<transition name="fade">
 				<div v-if='showMenu'>
 					<div class="dropdown-menu" id="dropdown-menu" role="menu" @click='dropdownSelected'>
 						<div class="dropdown-content">
-							<router-link to="/account" class="has-text-dark dropdown-item">账号</router-link>
+							<router-link to="/account" class="has-text-dark dropdown-item"><span class="icon">
+  <i class="fas fa-home"></i>
+</span>账号</router-link>
 							<hr class="dropdown-divider">
-							<router-link to="/benefits" class="has-text-dark dropdown-item">福利</router-link>
+							<router-link to="/benefits" class="has-text-dark dropdown-item"><span class="icon">
+  <i class="fas fa-user"></i>
+</span>福利</router-link>
 						</div>
 					</div>
 				</div>
