@@ -12,9 +12,7 @@ function authHeader() {
 }
 function getPolicy(code, cb) {
 	axios.get(`/policies/next?code=${code}`, authHeader())
-		.then(res => {
-			cb(res.data)
-		})
+		.then(res => cb(res.data))
 }
 function getPoliciesList(cb) {
 	axios.get('/policies', authHeader())
@@ -22,20 +20,31 @@ function getPoliciesList(cb) {
 }
 function createPolicy(code, number, cb) {
 	axios.post('/policies', {code: code, number: number}, authHeader())
-		.then(res => {
-			cb(res.data)
-		})
+		.then(res => cb(res.data))
 }
 function activePolicy(code, id, cb) {
 	axios.post(`/policies/${id}/active`, {}, authHeader())
-		.then(res => {
-			cb(res.data)
-		})
+		.then(res => cb(res.data))
+}
+function acceptPrize(id, cb) {
+	axios.patch(`/policies/${id}`, {status: 'rewarded'}, authHeader())
+		.then(res => cb(res.data))
+}
+function getNextPageByUrl (url, cb) {
+	axios.get(url, authHeader())
+		.then(res => cb(res.data))
+}
+function getTickets(n, cb) {
+	axios.patch('/users', {tickets_qty: n}, authHeader())
+		.then(res => cb(res.data))
 }
 export {
 	createPolicy,
 	activePolicy,
 	getPolicy,
 	getExpect,
-	getPoliciesList
+	getPoliciesList,
+	acceptPrize,
+	getNextPageByUrl,
+	getTickets
 }

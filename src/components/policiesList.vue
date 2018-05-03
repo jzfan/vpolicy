@@ -1,49 +1,55 @@
 <template>
-	<div>
-
-		<div class="box content" v-for='p in list'>
-			<h3 class="has-text-centered">
-				<small>(已用)</small>红包券
-			</h3>
-			<p>
-				类别： 双色球
-			</p>
-			<p>期数： {{ p.expect }}</p>
-			<p>
-				<span>投注号码：</span>
-				<span class="tag is-link">{{p.number|addZero}}</span>
-			</p> 
-
-			<p>大数据智能预测号码：</p>
-			<div class="field is-grouped is-grouped-multiline">
-				<div class="control"  v-for='re in p.recommend'>
-					<div class="tags">
-						<a class="tag is-link">{{re | addZero}}</a>
-					</div>
-				</div>
-			</div>
-			<p>created at: {{p.created_at}}</p>
+	<div class="content">
+		<h3 class="has-text-centered">
+			<small>(已用)</small>红包券
+		</h3>
+		<div v-for='p in page.data' class="box">
+			<policy-box :policy='p' :is='byCode(p.code)'></policy-box>
 		</div>
-
+		<br>
+		<nav class="pagination is-right" role="navigation" aria-label="pagination">
+		  <a class="pagination-previous" v-show='hasPre' @click='getNext(page.prev_page_url)'>
+		  	<span class="icon">
+		  	  <i class="iconfont icon-prepage"></i>
+		  	</span>
+		  上一页</a>
+		  <a class="pagination-next" v-show='hasNext' @click='getNext(page.next_page_url)'>下一页
+		  	<span class="icon">
+		  	  <i class="iconfont icon-nextpage"></i>
+		  	</span>
+		  </a>
+		</nav>
 	</div>
 </template>
 
 <script>
-import {getPoliciesList} from '../api'
+import {getPoliciesList, acceptPrize, getNextPageByUrl} from '../api'
+import ssqCard from './ssqCard'
+import fc3dCard from './fc3dCard'
 export default {
+	components: {fc3dCard, ssqCard},
 	data () {
 		return {
-			list: []
+			page: []
+		}
+	},
+	computed: {
+		hasPre () {
+			return this.page.current_page != 1
+			// if (this.page.current_page == 1) return false
+		},
+		hasNext () {
+			return !!this.page.next_page_url
 		}
 	},
 	created() {
 		getPoliciesList((data) => {
-			this.list = data
+			this.page = data
 		})
 	},
-	filters: {
-		addZero(num) {
-			return num < 10 ? '0' + num : num
+	methods: {
+		byCode (code) {
+			return code + 'Card'
 		}
 	}
 }
