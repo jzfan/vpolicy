@@ -35,8 +35,10 @@ function getNextPageByUrl (url, cb) {
 		.then(res => cb(res.data))
 }
 function getTickets(n, cb) {
-	axios.patch('/users', {tickets_qty: n}, authHeader())
-		.then(res => cb(res.data))
+	axios.put('/users', {tickets_qty: n}, authHeader())
+		.then(res => {
+			store.commit('increaseTickets', n)
+		})
 }
 export {
 	createPolicy,

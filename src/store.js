@@ -26,6 +26,9 @@ export default new Vuex.Store({
 	  ticketUsed(state) {
 	  	state.user.tickets_qty -= 1
 	  	state.user.tickets_used += 1
+	  },
+	  increaseTickets(state, n) {
+	  	state.user.tickets_qty += n
 	  }
 	}
 })
