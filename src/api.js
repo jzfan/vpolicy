@@ -30,7 +30,7 @@ function acceptPrize(id, cb) {
 	axios.patch(`/policies/${id}`, {status: 'rewarded'}, authHeader())
 		.then(res => cb(res.data))
 }
-function getNextPageByUrl (url, cb) {
+function getPageByUrl (url, cb) {
 	axios.get(url, authHeader())
 		.then(res => cb(res.data))
 }
@@ -47,6 +47,6 @@ export {
 	getExpect,
 	getPoliciesList,
 	acceptPrize,
-	getNextPageByUrl,
+	getPageByUrl,
 	getTickets
 }

@@ -16,16 +16,14 @@
 			<numbers v-on:chose-number="selectNumbers"></numbers>
 		</p>
 		<a class="button is-danger"  @click='reset' v-show='!selectAble'>重置</a>
+		<forecastSection v-on:save='save' :isDisabled='isDisabled'></forecastSection>
 		<p>大数据智能预测号码：</p>
-		<div class="field is-grouped is-grouped-multiline">
-			<a class="button is-primary" :disabled="isDisabled" @click='save'>预测</a>
-			<div class="control"  v-for='recommend in recommendedNumbers'>
-				<div class="tags">
-					<a class="tag is-link">{{recommend | addZero}}</a>
-				</div>
-			</div>
-			<p v-show='showMore' @click='displayAll'>...</p>
+
+		<div class="tags"  v-for='recommend in recommendedNumbers'>
+			<a class="tag is-link">{{recommend | addZero}}</a>
 		</div>
+
+			<p v-show='showMore' @click='displayAll'>...</p>
 		<footer class="">
 			<a class="button is-info" :disabled="isDisabled2" @click='active' style="width: 100%">激活红包</a>
 		</footer>
@@ -37,11 +35,12 @@
 
 <script>
 import {createPolicy, activePolicy, getPolicy} from '../api'
+import forecastSection from './forecastSection'
 import store from '../store'
 import moment from 'moment'
 import numbers from './numbers'
 export default {
-	components: {numbers},
+	components: {numbers, forecastSection},
 	data () {
 		return {
 			number: null,

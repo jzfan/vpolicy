@@ -12,6 +12,14 @@ export default new Vuex.Store({
 	  code: null,
 	  expect: []
 	},
+	getters: {
+		ticketsRemain: state => {
+			return state.user.tickets_qty
+		},
+		ticketsUsed: state => {
+			return state.user.tickets_used
+		}
+	},
 	mutations: {
 	  setUser (state, user) {
 	  	localStorage.setItem('user', JSON.stringify(user))

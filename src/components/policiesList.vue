@@ -8,12 +8,12 @@
 		</div>
 		<br>
 		<nav class="pagination is-right" role="navigation" aria-label="pagination">
-		  <a class="pagination-previous" v-show='hasPre' @click='getNext(page.prev_page_url)'>
+		  <a class="pagination-previous" v-show='hasPre' @click='pageByUrl(page.prev_page_url)'>
 		  	<span class="icon">
 		  	  <i class="iconfont icon-prepage"></i>
 		  	</span>
 		  上一页</a>
-		  <a class="pagination-next" v-show='hasNext' @click='getNext(page.next_page_url)'>下一页
+		  <a class="pagination-next" v-show='hasNext' @click='pageByUrl(page.next_page_url)'>下一页
 		  	<span class="icon">
 		  	  <i class="iconfont icon-nextpage"></i>
 		  	</span>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {getPoliciesList, acceptPrize, getNextPageByUrl} from '../api'
+import {getPoliciesList, acceptPrize, getPageByUrl} from '../api'
 import ssqCard from './ssqCard'
 import fc3dCard from './fc3dCard'
 export default {
@@ -50,6 +50,9 @@ export default {
 	methods: {
 		byCode (code) {
 			return code + 'Card'
+		},
+		pageByUrl(url) {
+			getPageByUrl(url, (data) => this.page = data)
 		}
 	}
 }

@@ -10,13 +10,7 @@
 		</p> 
 
 		<p>大数据智能预测号码：</p>
-		<div class="field is-grouped is-grouped-multiline">
-			<div class="control"  v-for='re in policy.recommend'>
-				<div class="tags">
-					<a class="tag is-link">{{re | addZero}}</a>
-				</div>
-			</div>
-		</div>
+		<tagList :recommends='policy.recommend' :winNumber='policy.win_number'></tagList>
 		<p>
 		{{policy.status | formatStatus}}
 		<a class="button is-danger is-focused" v-show='showPrizeBtn(policy.status)' @click='accept(p)'>领红包</a>
@@ -26,7 +20,9 @@
 </template>
 
 <script>
+import tagList from './tagList'
 export default {
+	components: {tagList},
 	methods: {
 		showPrizeBtn (status) {
 			return status == 'won'
@@ -36,8 +32,8 @@ export default {
 				p.status = 'rewarded'
 			})
 		},
-		getNext(url) {
-			getNextPageByUrl(url, (data) => this.page = data)
+		isWinNumber (number) {
+			return number == this.policy.win_number
 		}
 	},
 	filters: {

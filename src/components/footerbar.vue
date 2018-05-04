@@ -2,7 +2,7 @@
 	<nav class="level navbar is-fixed-bottom is-mobile has-text-centered">
 		<div class="level-item" @click='closeDropdown'>
 			<router-link to="/" class="has-text-dark">
-				<span class="icon has-text-info">
+				<span class="icon has-text-link">
 				  <i class="iconfont icon-interface3"></i>
 				</span>
 			历史分析</router-link>
@@ -18,8 +18,8 @@
 
 			<div class="dropdown-trigger" @click='openDropdown'>
 				<span :class='[dropdownActive ? "has-text-primary" : "has-text-dark"]'>
-					<span class="icon has-text-success">
-					  <i class="iconfont icon-home"></i>
+					<span class="icon has-text-info">
+					  <i class="iconfont icon-fuli"></i>
 					</span>
 				号码福利</span>
 			</div>
@@ -28,14 +28,14 @@
 					<div class="dropdown-menu" id="dropdown-menu" role="menu" @click='dropdownSelected'>
 						<div class="dropdown-content">
 							<router-link to="/account" class="has-text-dark dropdown-item">
-								<span class="icon">
+								<span class="icon has-text-success">
 								  <i class="iconfont icon-account"></i>
 								</span>
 							账号</router-link>
 							<hr class="dropdown-divider">
 							<router-link to="/benefits" class="has-text-dark dropdown-item">
-								<span class="icon">
-								  <i class="iconfont icon-home"></i>
+								<span class="icon has-text-danger">
+								  <i class="iconfont icon-iconfontzhizuobiaozhun023140"></i>
 								</span>
 							福利</router-link>
 						</div>
