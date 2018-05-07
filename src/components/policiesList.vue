@@ -3,8 +3,9 @@
 		<h3 class="has-text-centered">
 			<small>(已用)</small>红包券
 		</h3>
-		<div v-for='p in page.data' class="box">
-			<policy-box :policy='p' :is='byCode(p.code)'></policy-box>
+		<div v-for='policy in page.data' class="box">
+			<policyCard :policy='policy'></policyCard>
+			<!-- <policy-box :policy='p' :is='byCode(p.code)'></policy-box> -->
 		</div>
 		<br>
 		<nav class="pagination is-right" role="navigation" aria-label="pagination">
@@ -24,10 +25,9 @@
 
 <script>
 import {getPoliciesList, acceptPrize, getPageByUrl} from '../api'
-import ssqCard from './ssqCard'
-import fc3dCard from './fc3dCard'
+import policyCard from './policyCard'
 export default {
-	components: {fc3dCard, ssqCard},
+	components: {policyCard},
 	data () {
 		return {
 			page: []
@@ -48,9 +48,6 @@ export default {
 		})
 	},
 	methods: {
-		byCode (code) {
-			return code + 'Card'
-		},
 		pageByUrl(url) {
 			getPageByUrl(url, (data) => this.page = data)
 		}
