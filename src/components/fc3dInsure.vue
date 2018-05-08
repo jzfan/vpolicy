@@ -7,47 +7,55 @@
 		<p>
 			类别： 福彩3D
 		</p>
-		<p>期数： {{ expect }}</p>
+		<p>期数： <span class="has-text-info">{{ expect }}</span></p>
 		<p>
-			<span>实体彩票点已购的蓝球号：</span>
+			<span class="has-text-info">请输入实体彩票点已购的3D号：</span>
 			<p>{{number}}</p>
 		</p> 
 		<p v-show='selectAble'>	
 			<numbers v-on:chose-number="selectNumbers"></numbers>
 		</p>
-		<a class="button is-danger"  @click='reset' v-show='!selectAble'>重置</a>
+		<a class="button is-danger"  @click='reset' v-show='resetable'>重置</a>
 		<forecastSection v-on:save='save' :isDisabled='isDisabled'></forecastSection>
-		<p>大数据智能预测号码：</p>
 
-		<div class="tags"  v-for='recommend in recommendedNumbers'>
-			<a class="tag is-link">{{recommend | addZero}}</a>
-		</div>
+		<fc3dRecommendList :recommend='recommendedNumbers'></fc3dRecommendList>
 
-			<p v-show='showMore' @click='displayAll'>...</p>
-		<footer class="">
+<!-- 		<div class="tags" >
+			<a v-for='recommend in recommendedNumbers' class="tag is-link">{{recommend | addZero}}</a>
+		</div> -->
+
 			<a class="button is-info" :disabled="isDisabled2" @click='active' style="width: 100%">激活红包</a>
-		</footer>
 	</div>
-		<p>可用红包券数：{{ticketsRemain}}</p>
+	<div class="columns is-mobile">
+		<div class="column">
+			
+		<span>可用红包券数：{{ticketsRemain}}</span>
+		</div>
+		<div class="column">
 		<router-link to="/policiesList" class="button is-primary">已用红包券数：{{ticketsUsed}}</router-link>
+			
+		</div>
+		
+	</div>
 	</div>
 </template>
 
 <script>
 import {createPolicy, activePolicy, getPolicy} from '../api'
 import forecastSection from './forecastSection'
+import fc3dRecommendList from './fc3dRecommendList'
 import store from '../store'
 import moment from 'moment'
 import numbers from './numbers'
 export default {
-	components: {numbers, forecastSection},
+	components: {numbers, forecastSection, fc3dRecommendList},
 	data () {
 		return {
 			number: null,
 			recommendedNumbers: [],
 			fc3d: null,
-			saved: false,
-			showMore: false
+			showMore: false,
+			resetable: true
 		}
 	},
 	created () {
@@ -66,22 +74,13 @@ export default {
 		},
 		isDisabled () {
 				if (this.fc3d) return true
-				if (this.number == null) return true
+				if (this.number == null || this.number.length < 3) return true
 				return false
 			},
 			isDisabled2 () {
 				if (!this.fc3d) return true
 				return this.fc3d.status == 'active'
 			},
-			// isStatic () {
-			// 	if (this.fc3d) {
-			// 		let created_at = moment(this.fc3d.created_at)
-			// 		if (moment().diff(created_at, 'days') == 0) {
-			// 			return true
-			// 		}
-			// 	}
-			// 	return false
-			// },
 			expect () {
 				return store.state.expect.fc3d.next
 			},
@@ -92,10 +91,11 @@ export default {
 		methods: {
 			save () {
 				if (this.isDisabled) return
+				this.resetable = false
 				createPolicy ('fc3d', this.number, (data) => {
 					this.setData(data)
-					this.saved = true
 					this.showMore = true
+
 				})
 			},
 			active () {
@@ -112,7 +112,7 @@ export default {
 			setData(data) {
 				this.fc3d = data
 				this.number = this.fc3d.number
-				this.recommendedNumbers = this.fc3d.recommend.slice(1, 10)
+				this.recommendedNumbers = this.fc3d.recommend
 			},
 			selectNumbers(n) {
 				this.number == null ? this.number = n.toString() : this.number += n.toString()

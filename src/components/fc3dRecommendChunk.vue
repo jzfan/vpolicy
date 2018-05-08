@@ -32,7 +32,7 @@ export default {
 		}
 	},
 	created () {
-		this.chunk = this.chunk.sort()
+		this.chunk = this.chunk.sort((a, b) => a -b)
 	}
 
 }

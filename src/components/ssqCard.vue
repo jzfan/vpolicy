@@ -10,8 +10,7 @@
 		</p> 
 
 		<p>大数据智能预测号码：</p>
-		<ssqRecommendList :policy='policy'></ssqRecommendList>
-
+		<ssqRecommendList :recommends='policy.recommend' :winNumber='policy.win_number'></ssqRecommendList>
 		<slot name='status'></slot>
 	</div>
 </template>

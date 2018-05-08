@@ -10,8 +10,7 @@
 		</p> 
 
 		<p>大数据智能预测号码：</p>
-		<fc3dRecommendList :policy='policy'></fc3dRecommendList>
-		<slot name='percent'></slot>
+		<fc3dRecommendList :recommend='policy.recommend' :winNumber='policy.win_number'></fc3dRecommendList>
 		<slot name='status'></slot>
 	</div>
 </template>

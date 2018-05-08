@@ -1,10 +1,11 @@
 <template>
 	<table>
-		<tr v-for='(re, index) in policy.recommend'>
+
+		<tr v-for='(re, index) in recommends'>
 			<td>
-			<span class="tag" :class='[isWinNumber(re) ? "is-danger" : "is-link"]'>{{re | addZero(policy.code)}}</span>
+			<span class="tag" :class='[isWinNumber(re) ? "is-danger" : "is-link"]'>{{re | addZero}}</span>
 			</td>
-			<td>
+			<td>预估概率
 			<percent :index='index'></percent>
 			</td>
 		</tr>
@@ -16,7 +17,7 @@
 import percent from './percent'
 export default {
 	components: {percent},
-	props: ['policy'],
+	props: ['recommends', 'winNumber'],
 	data () {
 		return {
 			percent: []
@@ -24,11 +25,11 @@ export default {
 	},
 	methods: {
 		isWinNumber (number) {
-			return number == this.policy.win_number
+			return number == this.winNumber
 		},
 	},
 	filters: {
-		addZero(num, code) {
+		addZero(num) {
 			return (num < 10) ? '0' + num : num
 		}
 	}

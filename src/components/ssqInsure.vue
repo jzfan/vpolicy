@@ -7,9 +7,9 @@
 			<p>
 				类别： 双色球
 			</p>
-			<p>期数： {{ expect }}</p>
+			<p>期数： <span class="has-text-info">{{ expect }}</span></p>
 			<p>
-				<span>实体彩票点已购的蓝球号：</span>
+				<span class="has-text-info">请输入实体彩票点已购的蓝球号：</span>
 			</p> 
 			<p @click='selectNumber' id='balls'>	
 				<a class="button is-active is-rounded">01</a>
@@ -29,36 +29,40 @@
 				<a class="button is-active is-rounded">15</a>
 				<a class="button is-active is-rounded">16</a>
 			</p>
-			<forecastSection v-on:save='save' :isDisabled='isDisabled'></forecastSection>
-			<div v-for='recommend in recommendedNumbers'>
-				<div class="tags">
-					<a class="tag is-link">{{recommend | addZero}}</a>
-				</div>
-			</div>
-
-			<footer class="">
-				<a class="button is-info" :disabled="isDisabled2" @click='active' style="width: 100%">激活红包</a>
-			</footer>
+			<forecastSection v-on:save='save' v-on:loading='isLoading' :isDisabled='isDisabled'></forecastSection>
+			<ssqRecommendList :recommends='recommendedNumbers'></ssqRecommendList>
+			<a class="button is-info" :disabled="isDisabled2" @click='active' style="width: 100%">激活红包</a>
 		</div>
-		<p>可用红包券数：{{ticketsRemain}}</p>
-		<router-link to="/policiesList" class="button is-primary">已用红包券数：{{ticketsUsed}}</router-link>
+		<div class="columns is-mobile">
+			<div class="column">
+				
+			<span>可用红包券数：{{ticketsRemain}}</span>
+			</div>
+			<div class="column">
+			<router-link to="/policiesList" class="button is-primary">已用红包券数：{{ticketsUsed}}</router-link>
+				
+			</div>
+			
+		</div>
 	</div>
 </template>
 
 <script>
 import {createPolicy, activePolicy, getPolicy} from '../api'
+import ssqRecommendList from './ssqRecommendList'
 import { mapGetters } from 'vuex'
 import store from '../store'
 import moment from 'moment'
 import forecastSection from './forecastSection'
 export default {
-	components: { forecastSection},
+	components: { forecastSection, ssqRecommendList},
 	data () {
 		return {
 			number: null,
 			recommendedNumbers: [],
 			ssq: null,
-			saved: false
+			saved: false,
+			loading: false
 		}
 	},
 	created () {
@@ -71,6 +75,7 @@ export default {
 	computed: {
 		...mapGetters(['ticketsRemain', 'ticketsUsed']),
 		isDisabled () {
+			if (this.loading) return true
 			if (this.ssq) return true
 				if (this.number == null) return true
 					if (this.number > 16) return true
@@ -81,32 +86,27 @@ export default {
 						if (!this.ssq) return true
 							return this.ssq.status == 'active'
 					},
-			// isStatic () {
-			// 	if (this.ssq) {
-			// 		let created_at = moment(this.ssq.created_at)
-			// 		if (moment().diff(created_at, 'days') == 0) {
-			// 			return true
-			// 		}
-			// 	}
-			// 	return false
-			// },
 			expect () {
 				return store.state.expect.ssq.next
 			}
 		},
 		methods: {
+			isLoading () {
+				this.loading = true
+			},
 			save () {
-				if (this.isDisabled) return
-					createPolicy ('ssq', this.number, (data) => {
-						this.setData(data)
-						this.saved = true
-					})
+				// if (this.isDisabled) return
+				createPolicy ('ssq', this.number, (data) => {
+					this.setData(data)
+					this.saved = true
+				})
 			},
 			active () {
 				if (this.isDisabled2) return
 					activePolicy ('ssq', this.ssq.id, (data) => {
 						this.ssq = null
 						this.number = null
+						this.loading = false
 						this.clearSelected()
 						this.recommendedNumbers = []
 						store.commit('ticketUsed')
