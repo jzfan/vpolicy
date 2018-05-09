@@ -40,6 +40,13 @@ function getTickets(n, cb) {
 			store.commit('increaseTickets', n)
 		})
 }
+function getSsqHistoryData(cb) {
+	getHistoryByCode('ssq', cb)
+}
+function getHistoryByCode(code, cb) {
+	axios.get(`/lotteries?code=${code}`)
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -48,5 +55,6 @@ export {
 	getPoliciesList,
 	acceptPrize,
 	getPageByUrl,
-	getTickets
+	getTickets,
+	getSsqHistoryData
 }

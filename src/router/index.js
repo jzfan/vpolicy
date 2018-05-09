@@ -10,6 +10,9 @@ import charge from '@/components/charge'
 import fc3dInsure from '@/components/fc3dInsure'
 import ssqInsure from '@/components/ssqInsure'
 import policiesList from '@/components/policiesList'
+import ssqHistoryChart from '@/components/ssqHistoryChart'
+import fc3dHistoryChart from '@/components/fc3dHistoryChart'
+import history from '@/components/history'
 import store from '../store'
 
 Vue.use(Router)
@@ -18,6 +21,9 @@ let router = new Router({
   linkExactActiveClass: 'has-text-primary',
   mode: 'history', 
   routes: [
+      {path: '/history', name: 'history', component: history },
+      {path: '/fc3dHistoryChart', name: 'fc3dHistoryChart', component: fc3dHistoryChart },
+      {path: '/ssqHistoryChart', name: 'ssqHistoryChart', component: ssqHistoryChart },
       {path: '/policiesList', name: 'policiesList', component: policiesList },
       {path: '/ssqInsure', name: 'ssqInsure', component: ssqInsure },
       {path: '/fc3dInsure', name: 'fc3dInsure', component: fc3dInsure },

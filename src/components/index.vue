@@ -6,9 +6,9 @@
 			</p>
 		</div>
 		<div class="box">
-			<p class="title is-5">
+			<a class="title is-5" @click='$router.push("history")'>
 				历史号码统计
-			</p>
+			</a>
 		</div>
 		<div class="box">
 			<p class="title is-5">
