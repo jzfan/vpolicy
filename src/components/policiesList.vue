@@ -8,7 +8,7 @@
 			<!-- <policy-box :policy='p' :is='byCode(p.code)'></policy-box> -->
 		</div>
 		<br>
-		<nav class="pagination is-right" role="navigation" aria-label="pagination">
+		<nav class="pagination is-right" role="navigation" aria-label="pagination" @click='goTop'>
 		  <a class="pagination-previous" v-show='hasPre' @click='pageByUrl(page.prev_page_url)'>
 		  	<span class="icon">
 		  	  <i class="iconfont icon-prepage"></i>
@@ -50,6 +50,9 @@ export default {
 	methods: {
 		pageByUrl(url) {
 			getPageByUrl(url, (data) => this.page = data)
+		},
+		goTop () {
+			document.documentElement.scrollTop = 0
 		}
 	}
 }

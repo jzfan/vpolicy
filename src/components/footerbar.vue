@@ -21,7 +21,7 @@
 					<span class="icon has-text-info">
 					  <i class="iconfont icon-fuli"></i>
 					</span>
-				号码福利</span>
+				会员福利</span>
 			</div>
 			<transition name="fade">
 				<div v-if='showMenu'>
@@ -51,13 +51,18 @@ export default {
 	data() {
 		return {
 			dropdownActive: false,
-			showMenu: false
+			showMenu: false,
+			timeoutID: null
 		}
 	},
 	methods: {
 		openDropdown() {
+			if (this.timeoutID !== null) {
+				clearTimeout(this.timeoutID)
+			}
 			this.showMenu = true
 			this.dropdownActive = true
+			this.timeoutID = setTimeout(() => this.closeDropdown(), 3000)
 		},
 		closeDropdown() {
 			this.showMenu = false

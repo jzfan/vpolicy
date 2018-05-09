@@ -23,27 +23,35 @@
 	  	<br>
 	  	<br>
 	  	<a class="button is-danger" @click='getFreeTickets(10)' style="width: 100%">测试领劵</a>
+
+		<goChargeModal v-if='needCharge'></goChargeModal>
+	  	
+
 	</div>
 </template>
 
 <script>
 import {getTickets} from '../api'
-import router from '../router'
+// import router from '../router'
 import store from '../store'
+import goChargeModal from './goChargeModal'
 export default {
+	components: {goChargeModal},
 	data () {
 		return {
 			user: store.state.user,
-			showDetails: false
+			showDetails: false,
+			needCharge: false
 		}
 	},
 	methods: {
 		insure(code) {
 			if (store.state.user.tickets_qty > 0) {
-				router.push(`${code}Insure`)
+				this.$router.push(`${code}Insure`)
 			} else {
-				store.commit('selectedCode', code)
-				router.push('charge')
+				// store.commit('selectedCode', code)
+				this.needCharge = true
+				// this.$router.push('charge')
 			}
 		},
 		getFreeTickets(n) {

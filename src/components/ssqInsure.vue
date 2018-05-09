@@ -29,7 +29,7 @@
 				<a class="button is-active is-rounded">15</a>
 				<a class="button is-active is-rounded">16</a>
 			</p>
-			<forecastSection v-on:save='save' v-on:loading='isLoading' :isDisabled='isDisabled'></forecastSection>
+			<forecastSection v-on:noTicket='noTicket' v-on:save='save' v-on:loading='isLoading' :isDisabled='isDisabled'></forecastSection>
 			<ssqRecommendList :recommends='recommendedNumbers'></ssqRecommendList>
 			<a class="button is-info" :disabled="isDisabled2" @click='active' style="width: 100%">激活红包</a>
 		</div>
@@ -39,11 +39,11 @@
 			<span>可用红包券数：{{ticketsRemain}}</span>
 			</div>
 			<div class="column">
-			<router-link to="/policiesList" class="button is-primary">已用红包券数：{{ticketsUsed}}</router-link>
-				
+			<router-link to="/policiesList" class="button is-primary">已用红包券数：{{ticketsUsed}}</router-link>		
 			</div>
 			
 		</div>
+		<noTicketModal v-if='showNoTicket' v-on:close='closeNoTicket'></noTicketModal>
 	</div>
 </template>
 
@@ -54,15 +54,17 @@ import { mapGetters } from 'vuex'
 import store from '../store'
 import moment from 'moment'
 import forecastSection from './forecastSection'
+import noTicketModal from './noTicketModal'
 export default {
-	components: { forecastSection, ssqRecommendList},
+	components: { forecastSection, ssqRecommendList, noTicketModal},
 	data () {
 		return {
 			number: null,
 			recommendedNumbers: [],
 			ssq: null,
 			saved: false,
-			loading: false
+			loading: false,
+			showNoTicket: false
 		}
 	},
 	created () {
@@ -93,6 +95,12 @@ export default {
 		methods: {
 			isLoading () {
 				this.loading = true
+			},
+			noTicket () {
+				this.showNoTicket = true
+			},
+			closeNoTicket () {
+				this.showNoTicket = false
 			},
 			save () {
 				// if (this.isDisabled) return

@@ -2,12 +2,12 @@
 	<div>
 		<div class="box">
 			<p class="title is-5">
-				历史号码统计
+				当期号码开奖公告
 			</p>
 		</div>
 		<div class="box">
 			<p class="title is-5">
-				当期号码开奖公告
+				历史号码统计
 			</p>
 		</div>
 		<div class="box">

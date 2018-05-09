@@ -1,0 +1,9 @@
+// 1. Import the initial variables
+@import "../../node_modules/bulma/sass/utilities/initial-variables";
+
+// 2. Set your own initial variables
+$warning: #ff9900;
+
+
+// 6. Import the rest of Bulma
+@import "../../node_modules/bulma/bulma";

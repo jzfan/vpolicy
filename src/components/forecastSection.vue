@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import store from '../store'
 export default {
 	props: ['isDisabled'],
 	data () {
@@ -18,6 +19,10 @@ export default {
 	},
 	methods: {
 		saveClicked() {
+			if (store.state.user.tickets_qty <= 0) {
+				this.$emit('noTicket')
+				return
+			}
 			this.$emit('loading')
 			let interval = setInterval(() => {
 				this.width += 1
