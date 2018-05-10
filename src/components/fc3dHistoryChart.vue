@@ -1,26 +1,45 @@
 <template>
   <div>
-    
-  <barChart :data='test'></barChart>
+  <barChart :chart-data='chartDataBai'></barChart>
+  <barChart :chart-data='chartDataShi'></barChart>
+  <barChart :chart-data='chartDataGe'></barChart>
   </div>
 </template>
 <script>
+import { Bar } from 'vue-chartjs'
 import barChart from './barChart'
+import {getFc3dHistoryCountData} from '../api'
 export default {
-	data () {
-		return {
-			test: {
-        labels: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16'],
-        datasets: [
-          {
-          	label: '蓝球',
-            backgroundColor: '#f87979',
-            data: [11, 22, 33, 44, 55, 66, 40, 40, 39, 10, 40, 39, 80, 40, 40, 39]
-          }
-        ]
-      }
-		}
-	},
+  extends: Bar,
   components: { barChart },
+  data () {
+    return {
+      chartDataBai: null,
+      chartDataShi: null,
+      chartDataGe: null
+    }
+  },
+  created () {
+    getFc3dHistoryCountData((data) => {
+      this.chartDataBai = this.setData(data.bai, '百位')
+      this.chartDataShi = this.setData(data.shi, '十位')
+      this.chartDataGe = this.setData(data.ge, '个位')
+      })
+  },
+  methods: {
+    setData (data, label) {
+      data.sort((a,b) => a.number - b.number)
+      return {
+          labels: data.map(i => i.number),
+          datasets: [
+            {
+              label: label,
+              backgroundColor: '#f87979',
+              data: data.map(i => i.count)
+            }
+          ]
+        }
+    }
+  }
 }
 </script>

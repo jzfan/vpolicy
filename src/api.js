@@ -40,11 +40,14 @@ function getTickets(n, cb) {
 			store.commit('increaseTickets', n)
 		})
 }
-function getSsqHistoryData(cb) {
-	getHistoryByCode('ssq', cb)
+function getSsqHistoryCountData(cb) {
+	getWinNumberCountByCode('ssq', cb)
 }
-function getHistoryByCode(code, cb) {
-	axios.get(`/lotteries?code=${code}`)
+function getFc3dHistoryCountData(cb) {
+	getWinNumberCountByCode('fc3d', cb)
+}
+function getWinNumberCountByCode(code, cb) {
+	axios.get(`/lotteries/count?code=${code}`)
 		.then(res => cb(res.data))
 }
 export {
@@ -56,5 +59,6 @@ export {
 	acceptPrize,
 	getPageByUrl,
 	getTickets,
-	getSsqHistoryData
+	getSsqHistoryCountData,
+	getFc3dHistoryCountData
 }
