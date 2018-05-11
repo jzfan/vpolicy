@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="box">
-			<p class="title is-5">
+			<a class="title is-5" @click='$router.push("current")'>
 				当期号码开奖公告
-			</p>
+			</a>
 		</div>
 		<div class="box">
 			<a class="title is-5" @click='$router.push("history")'>

@@ -8,38 +8,19 @@
 			<!-- <policy-box :policy='p' :is='byCode(p.code)'></policy-box> -->
 		</div>
 		<br>
-		<nav class="pagination is-right" role="navigation" aria-label="pagination" @click='goTop'>
-		  <a class="pagination-previous" v-show='hasPre' @click='pageByUrl(page.prev_page_url)'>
-		  	<span class="icon">
-		  	  <i class="iconfont icon-prepage"></i>
-		  	</span>
-		  上一页</a>
-		  <a class="pagination-next" v-show='hasNext' @click='pageByUrl(page.next_page_url)'>下一页
-		  	<span class="icon">
-		  	  <i class="iconfont icon-nextpage"></i>
-		  	</span>
-		  </a>
-		</nav>
+<page-link :page='page' v-on:fresh='fresh'></page-link>
 	</div>
 </template>
 
 <script>
-import {getPoliciesList, acceptPrize, getPageByUrl} from '../api'
+import {getPoliciesList} from '../api'
 import policyCard from './policyCard'
+import pageLink from './pageLink'
 export default {
-	components: {policyCard},
+	components: {policyCard, 'page-link': pageLink},
 	data () {
 		return {
 			page: []
-		}
-	},
-	computed: {
-		hasPre () {
-			return this.page.current_page != 1
-			// if (this.page.current_page == 1) return false
-		},
-		hasNext () {
-			return !!this.page.next_page_url
 		}
 	},
 	created() {
@@ -48,11 +29,8 @@ export default {
 		})
 	},
 	methods: {
-		pageByUrl(url) {
-			getPageByUrl(url, (data) => this.page = data)
-		},
-		goTop () {
-			document.documentElement.scrollTop = 0
+		fresh (page) {
+			this.page = page
 		}
 	}
 }

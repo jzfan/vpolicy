@@ -13,6 +13,8 @@ import policiesList from '@/components/policiesList'
 import ssqHistoryChart from '@/components/ssqHistoryChart'
 import fc3dHistoryChart from '@/components/fc3dHistoryChart'
 import history from '@/components/history'
+import current from '@/components/current'
+import ssqHistoryList from '@/components/ssqHistoryList'
 import store from '../store'
 
 Vue.use(Router)
@@ -22,6 +24,8 @@ let router = new Router({
   mode: 'history', 
   routes: [
       {path: '/history', name: 'history', component: history },
+      {path: '/ssqHistoryList', name: 'ssqHistoryList', component: ssqHistoryList },
+      {path: '/current', name: 'current', component: current },
       {path: '/fc3dHistoryChart', name: 'fc3dHistoryChart', component: fc3dHistoryChart },
       {path: '/ssqHistoryChart', name: 'ssqHistoryChart', component: ssqHistoryChart },
       {path: '/policiesList', name: 'policiesList', component: policiesList },

@@ -23,7 +23,7 @@ export default {
           datasets: [
             {
               label: '蓝球',
-              backgroundColor: '#f87979',
+              backgroundColor: '#3374dd',
               data: data.map(i => i.count)
             }
           ]

@@ -50,6 +50,14 @@ function getWinNumberCountByCode(code, cb) {
 	axios.get(`/lotteries/count?code=${code}`)
 		.then(res => cb(res.data))
 }
+function getCurrentNotice(cb) {
+	axios.get('/lotteries/current')
+		.then(res => cb(res.data))
+}
+function getHistoryListByPage(code, cb) {
+	axios.get(`/lotteries/${code}/history`)
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -60,5 +68,7 @@ export {
 	getPageByUrl,
 	getTickets,
 	getSsqHistoryCountData,
-	getFc3dHistoryCountData
+	getFc3dHistoryCountData,
+	getCurrentNotice,
+	getHistoryListByPage
 }
