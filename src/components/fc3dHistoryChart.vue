@@ -8,7 +8,7 @@
 <script>
 import { Bar } from 'vue-chartjs'
 import barChart from './barChart'
-import {getFc3dHistoryCountData} from '../api'
+import {getWinNumberCountByCode} from '../api'
 export default {
   extends: Bar,
   components: { barChart },
@@ -20,7 +20,7 @@ export default {
     }
   },
   created () {
-    getFc3dHistoryCountData((data) => {
+    getWinNumberCountByCode('fc3d', (data) => {
       this.chartDataBai = this.setData(data.bai, '百位')
       this.chartDataShi = this.setData(data.shi, '十位')
       this.chartDataGe = this.setData(data.ge, '个位')

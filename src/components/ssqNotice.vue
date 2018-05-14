@@ -4,7 +4,9 @@
 
 		<template slot='balls'>
 			<ssqBalls :opencode='lottery.opencode'>
-				<template slot='more'></template>
+				<template slot='more'>
+					<span class="tag more" @click='$router.push("ssqHistoryList")'> > </span>
+				</template>
 			</ssqBalls>
 		</template>
 

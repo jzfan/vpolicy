@@ -8,9 +8,7 @@
 				<span class="tag is-rounded is-link">{{ number }}</span>
 			</template>
 		</template>
-		<slot name='more'>
-			<span class="tag more" @click='$router.push("ssqHistoryList")'> > </span>
-		</slot>
+		<slot name='more'></slot>
 	</div>
 </template>
 

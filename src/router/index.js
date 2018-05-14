@@ -15,6 +15,8 @@ import fc3dHistoryChart from '@/components/fc3dHistoryChart'
 import history from '@/components/history'
 import current from '@/components/current'
 import ssqHistoryList from '@/components/ssqHistoryList'
+import fc3dHistoryList from '@/components/fc3dHistoryList'
+import notebook from '@/components/notebook'
 import store from '../store'
 
 Vue.use(Router)
@@ -24,6 +26,8 @@ let router = new Router({
   mode: 'history', 
   routes: [
       {path: '/history', name: 'history', component: history },
+      {path: '/notebook', name: 'notebook', component: notebook },
+      {path: '/fc3dHistoryList', name: 'fc3dHistoryList', component: fc3dHistoryList },
       {path: '/ssqHistoryList', name: 'ssqHistoryList', component: ssqHistoryList },
       {path: '/current', name: 'current', component: current },
       {path: '/fc3dHistoryChart', name: 'fc3dHistoryChart', component: fc3dHistoryChart },

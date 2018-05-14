@@ -2,11 +2,10 @@
 	<baseNotice :lottery='lottery'>
 		<template slot='name'>福彩3D</template>
 		<div slot='balls' class="tags">
-			<slot name='balls'></slot>
 			<div class="tag is-danger is-rounded" v-for='number in opencode'>
 				{{ number }}
 			</div>
-			<span class="tag more"> > </span>
+			<span class="tag more" @click='$router.push("fc3dHistoryList")'> > </span>
 		</div>
 	</baseNotice>
 </template>

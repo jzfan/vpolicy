@@ -1,33 +1,46 @@
 <template>
   <div>
-  <barChart :chart-data='chartData'></barChart>
+  <barChart :chart-data='chartDataBlue'></barChart>
+  <barChart :chart-data='chartDataRed'></barChart>
   </div>
 </template>
 <script>
 import { Bar } from 'vue-chartjs'
 import barChart from './barChart'
-import {getSsqHistoryCountData} from '../api'
+import {getWinNumberCountByCode} from '../api'
 export default {
   extends: Bar,
   components: { barChart },
   data () {
     return {
-      chartData: null
+      chartDataBlue: null,
+      chartDataRed: null
     }
   },
   created () {
-    getSsqHistoryCountData((data) => {
-      data.sort((a,b) => a.number - b.number)
-      this.chartData = {
-          labels: data.map(i => i.number),
+    getWinNumberCountByCode('ssq', (data) => {
+      data.blue.sort((a,b) => a.number - b.number)
+      data.red.sort((a,b) => a.number - b.number)
+      this.chartDataBlue = {
+          labels: data.blue.map(i => i.number),
           datasets: [
             {
               label: '蓝球',
               backgroundColor: '#3374dd',
-              data: data.map(i => i.count)
+              data: data.blue.map(i => i.count)
             }
           ]
         }
+        this.chartDataRed = {
+            labels: data.red.map(i => i.number),
+            datasets: [
+              {
+                label: '红球',
+                backgroundColor: '#FF0000',
+                data: data.red.map(i => i.count)
+              }
+            ]
+          }
       })
   }
 }
