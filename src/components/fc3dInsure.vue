@@ -20,10 +20,6 @@
 
 		<fc3dRecommendList :recommend='recommendedNumbers'></fc3dRecommendList>
 
-<!-- 		<div class="tags" >
-			<a v-for='recommend in recommendedNumbers' class="tag is-link">{{recommend | addZero}}</a>
-		</div> -->
-
 			<a class="button is-info" :disabled="isDisabled2" @click='active' style="width: 100%">激活红包</a>
 	</div>
 	<div class="columns is-mobile">
@@ -52,7 +48,7 @@ export default {
 	data () {
 		return {
 			number: null,
-			recommendedNumbers: [],
+			recommendedNumbers: null,
 			fc3d: null,
 			showMore: false,
 			resetable: true
@@ -104,7 +100,7 @@ export default {
 						this.fc3d = null
 						this.number = null
 						// this.clearSelected()
-						this.recommendedNumbers = []
+						this.recommendedNumbers = null
 						this.showMore = false
 						store.commit('ticketUsed')
 					})

@@ -60,7 +60,7 @@ export default {
 	data () {
 		return {
 			number: null,
-			recommendedNumbers: [],
+			recommendedNumbers: null,
 			ssq: null,
 			saved: false,
 			loading: false,
@@ -116,7 +116,7 @@ export default {
 						this.number = null
 						this.loading = false
 						this.clearSelected()
-						this.recommendedNumbers = []
+						this.recommendedNumbers = null
 						store.commit('ticketUsed')
 					})
 			},

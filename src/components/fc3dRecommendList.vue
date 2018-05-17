@@ -1,23 +1,53 @@
 <template>
-	<table>
-		<tr v-for='(chunk, index) in chunks'>
+	<table v-if='recommend != null'>
+		<tr>
 			<td>
-				<fc3dRecommendChunk :chunk='chunk' :winNumber='winNumber' :displayAll='displayAll'>
-				</fc3dRecommendChunk>
+				百位
 			</td>
 			<td>
-				预估概率<percent :index='index'></percent>
+				<span class="tags">
+					<span  v-for='bai in recommend.bai' class="tag is-rounded">{{bai}}</span>
+				</span>
+			</td>
+			<td>
+				预估概率<percent :index='0'></percent>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				十位
+			</td>
+			<td>
+				<span class="tags">
+					<span  v-for='shi in recommend.shi' class="tag is-rounded">{{shi}}</span>
+				</span>
+			</td>
+				<td>
+					预估概率<percent :index='0'></percent>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					个位
+				</td>
+			<td>
+				<span class="tags">
+					<span  v-for='ge in recommend.ge' class="tag is-rounded">{{ge}}</span>
+				</span>
+			</td>
+				<td>
+					预估概率<percent :index='0'></percent>
+				</td>
+			</tr>
 
 	</table>
 </template>
 
 <script>
-import fc3dRecommendChunk from './fc3dRecommendChunk'
+
 import percent from './percent'
 export default {
-	components: {fc3dRecommendChunk, percent},
+	components: { percent},
 	props: ['recommend', 'winNumber'],
 	data () {
 		return {
@@ -26,25 +56,7 @@ export default {
 		}
 	},
 	methods: {
-		randomsort(a, b) {
-		   return Math.random()>.5 ? -1 : 1;
-		},
-		chunk(arr, len) {
-		  var chunks = []
-		  var i = 0
-		  var n = arr.length
 
-		  while (i < n) {
-		    chunks.push(arr.slice(i, i += len)); // gives [[0,1,2] [3,4,5]]
-		  }
-		  return chunks
-		},
 	},
-	computed: {
-		chunks () {
-			this.recommend.sort(this.randomsort)
-			return this.chunk(this.recommend, Math.ceil(this.recommend.length / 3))
-		}
-	}
 }
 </script>
