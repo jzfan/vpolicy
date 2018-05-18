@@ -52,6 +52,10 @@ function getHistoryListByPage(code, cb) {
 	axios.get(`/lotteries/${code}/history`)
 		.then(res => cb(res.data))
 }
+function takeHongbao(policy_id, cb) {
+	axios.put('/accounts', {policy_id, type: 'increment'}, authHeader())
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -63,5 +67,6 @@ export {
 	getTickets,
 	getWinNumberCountByCode,
 	getCurrentNotice,
-	getHistoryListByPage
+	getHistoryListByPage,
+	takeHongbao
 }

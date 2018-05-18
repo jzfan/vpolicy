@@ -27,7 +27,7 @@ export default {
 	},
 	created () {
 		let n = Math.floor(Math.random()*(51));
-		this.percent =  this.randomDivide(n, 3).map((item) => item + 10).sort().reverse()
+		this.percent =  this.randomDivide(n, 3).map((item) => item + 40).sort().reverse()
 	}
 }
 </script>

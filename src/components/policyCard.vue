@@ -4,7 +4,7 @@
 			<template slot='status'>
 				<p>
 					<span>状态： {{policy.status | formatStatus}}</span>
-					<a class="button is-warning is-focused is-pulled-right" v-show='showPrizeBtn(policy.status)' @click='accept(p)'>
+					<a class="button is-warning is-focused is-pulled-right" v-show='showPrizeBtn(policy.status)' @click='take(policy.id)'>
 						<span class="icon has-text-danger">
 						  <i class="iconfont icon-hongbao"></i> 
 						</span>
@@ -23,17 +23,25 @@
 <script>
 import ssqCard from './ssqCard'
 import fc3dCard from './fc3dCard'
+import {takeHongbao} from '../api'
 export default {
 	props: ['policy'],
 	components: {fc3dCard, ssqCard},
+	computed: {
+		hongbaoText () {
+
+		}
+	},
 	methods: {
 		byCode (code) {
 			return code + 'Card'
 		},
 		showPrizeBtn (status) {
-			return status == 'won'
+			return status == 'lose'
 		},
-
+		take (policy_id) {
+			takeHongbao(policy_id, (data) => this.policy.status = 'rewarded')
+		}
 	},
 	filters: {
 		formatStatus(v) {
