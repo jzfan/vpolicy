@@ -24,6 +24,7 @@
 import ssqCard from './ssqCard'
 import fc3dCard from './fc3dCard'
 import {takeHongbao} from '../api'
+import bus from '../bus'
 export default {
 	props: ['policy'],
 	components: {fc3dCard, ssqCard},
@@ -40,6 +41,7 @@ export default {
 			return status == 'lose'
 		},
 		take (policy_id) {
+			bus.$emit('flash', '已领红包')
 			takeHongbao(policy_id, (data) => this.policy.status = 'rewarded')
 		}
 	},

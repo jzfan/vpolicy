@@ -112,6 +112,7 @@ export default {
 			},
 			selectNumbers(n) {
 				this.number == null ? this.number = n.toString() : this.number += n.toString()
+				this.resetable = true
 				// this.number += n.toString()
 				// console.log(n) 
 			},

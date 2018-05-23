@@ -6,11 +6,10 @@
         <router-view/>
       </div>
     </div>
+    <flash></flash>
     <footerbar></footerbar>
   </div>
 </template>
-
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
 <script>
 import heroIndex from './components/hero'
@@ -18,9 +17,11 @@ import heroAccount from './components/heroAccount'
 import footerbar from './components/footerbar'
 import store from './store'
 import {getExpect} from './api'
+import flash from './components/flash'
+import bus from './bus'
 export default {
   name: 'App',
-  components: {heroIndex, heroAccount, footerbar},
+  components: {heroIndex, heroAccount, footerbar, flash},
   created () {
     getExpect((data) => store.commit('setExpect', data))
   },
@@ -36,6 +37,7 @@ export default {
 /*@import '../node_modules/bulma/bulma.sass'*/
 @import './assets/mystyle.scss'
 </style>
+
 
 
 
