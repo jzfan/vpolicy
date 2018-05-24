@@ -1,5 +1,6 @@
 <template>
   <div>
+  <selectLimit v-on:getCount='getCount'></selectLimit>
   <barChart :chart-data='chartDataBlue'></barChart>
   <barChart :chart-data='chartDataRed'></barChart>
   </div>
@@ -7,18 +8,22 @@
 <script>
 import { Bar } from 'vue-chartjs'
 import barChart from './barChart'
+import selectLimit from './selectLimit'
 import {getWinNumberCountByCode} from '../api'
 export default {
   extends: Bar,
-  components: { barChart },
+  components: { barChart, selectLimit },
   data () {
     return {
       chartDataBlue: null,
       chartDataRed: null
     }
   },
-  created () {
-    getWinNumberCountByCode('ssq', (data) => {
+  methods: {
+    getCount(n) {
+      getWinNumberCountByCode('ssq', n,  (data) => this.setData(data))
+    },
+    setData (data) {
       data.blue.sort((a,b) => a.number - b.number)
       data.red.sort((a,b) => a.number - b.number)
       this.chartDataBlue = {
@@ -41,7 +46,10 @@ export default {
               }
             ]
           }
-      })
+    }
+  },
+  created () {
+    getWinNumberCountByCode('ssq', 50, (data) => this.setData(data))
   }
 }
 </script>

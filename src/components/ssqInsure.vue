@@ -29,7 +29,7 @@
 				<a class="button is-active is-rounded">15</a>
 				<a class="button is-active is-rounded">16</a>
 			</p>
-			<forecastSection v-on:noTicket='noTicket' v-on:save='save' v-on:loading='isLoading' :isDisabled='isDisabled'></forecastSection>
+			<forecastSection v-on:noTicket='noTicket' v-on:save='save' v-on:loading='isLoading' :isDisabled='isDisabled' :number='number'></forecastSection>
 			<ssqRecommendList :recommends='recommendedNumbers'></ssqRecommendList>
 			<a class="button is-info" :disabled="isDisabled2" @click='active' style="width: 100%">激活红包</a>
 		</div>

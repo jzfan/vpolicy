@@ -16,7 +16,7 @@
 			<numbers v-on:chose-number="selectNumbers"></numbers>
 		</p>
 		<a class="button is-danger"  @click='reset' v-show='resetable'>重置</a>
-		<forecastSection v-on:save='save' :isDisabled='isDisabled'></forecastSection>
+		<forecastSection v-on:save='save' :isDisabled='isDisabled' :number='number'></forecastSection>
 
 		<fc3dRecommendList :recommend='recommendedNumbers'></fc3dRecommendList>
 

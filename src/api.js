@@ -40,8 +40,8 @@ function getTickets(n, cb) {
 			store.commit('increaseTickets', n)
 		})
 }
-function getWinNumberCountByCode(code, cb) {
-	axios.get(`/lotteries/count?code=${code}`)
+function getWinNumberCountByCode(code, n, cb) {
+	axios.get(`/lotteries/count?code=${code}&limit=${n}`)
 		.then(res => cb(res.data))
 }
 function getCurrentNotice(cb) {
@@ -54,7 +54,11 @@ function getHistoryListByPage(code, cb) {
 }
 function takeHongbao(policy_id, cb) {
 	axios.put('/accounts', {policy_id, type: 'increment'}, authHeader())
-		.then(res => cb(res.data))
+		.then(res => {
+			cb(res.data)
+			store.state.user.account += 200
+			localStorage.setItem('user', JSON.stringify(store.state.user))
+		})
 }
 export {
 	createPolicy,

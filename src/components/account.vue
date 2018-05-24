@@ -1,10 +1,13 @@
 <template>
-	<div>
+	<div class="content">
 		<article class="message is-dark">
 		  <div class="message-body">
 		    可用余额 : {{user.account | cent2yuan}} 元
 		  </div>
 		</article>
+		<figure>
+		    <img src="https://bulma.io/images/placeholders/256x256.png">
+		</figure>
 	</div>
 </template>
 
