@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<a class="button is-primary" :disabled="isDisabled" @click='saveClicked'>智能诊断，分析预测</a>
-			<span>诊断得分：</span><span class="tag is-dark is-medium is-rounded" v-show='odds'>{{odds}}</span>
+			<span>诊断得分：</span><span class="tag is-warning is-medium is-rounded" v-show='odds'>{{odds}}</span>
 			<p>大数据智能预测号码：</p>
 			<progress class="progress is-primary" :value='width' max="100" v-show='width'></progress>
 		</div>

@@ -1,7 +1,46 @@
 <template>
-	<div>
-		<a class="button" @click='$emit("getCount", 50)'>50期</a>
-		<a class="button" @click='$emit("getCount", 100)'>100期</a>
-		<a class="button" @click='$emit("getCount", 200)'>200期</a>
+	<div id='select-div'>
+		<a class="button" @click='selectLimit(50, $event)'>50期</a>
+		<a class="button" @click='selectLimit(100, $event)'>100期</a>
+		<a class="button" @click='selectLimit(200, $event)'>200期</a>
+		<span class="field has-addons">
+		  <span class="control">
+		    <input class="input" type="number" min='1' max="200" v-model.trim.number='limit' placeholder="1-200">
+		  </span>
+		  <span class="control">
+		    <a class="button is-info" @click='inputLimit'>
+		      分析
+		    </a>
+		  </span>
+		</span>
 	</div>
 </template>
+
+<script>
+export default {
+	data () {
+		return {
+			limit: ''
+		}
+	},
+	methods: {
+		selectLimit (select, event) {
+			document.querySelectorAll("#select-div>a").forEach(a => a.className='button')
+			event.target.className = 'button is-primary'
+			this.$emit("getCount", select)
+		},
+		inputLimit () {
+			this.limit = Math.ceil(this.limit)
+			if (this.limit > 0) {
+				this.$emit("getCount", this.limit)
+			}
+		}
+	}
+}
+</script>
+
+<style type="text/css">
+#select-div > a {
+	margin-bottom: 1rem;
+}
+</style>
