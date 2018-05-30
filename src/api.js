@@ -60,6 +60,10 @@ function takeHongbao(policy_id, cb) {
 			localStorage.setItem('user', JSON.stringify(store.state.user))
 		})
 }
+function getQrcode(cb) {
+	axios.post('/qrcodes', {}, authHeader())
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -72,5 +76,6 @@ export {
 	getWinNumberCountByCode,
 	getCurrentNotice,
 	getHistoryListByPage,
-	takeHongbao
+	takeHongbao,
+	getQrcode
 }
