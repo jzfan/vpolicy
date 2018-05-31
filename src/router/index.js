@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
 import insure from '@/components/insure'
-import benefits from '@/components/benefits'
 import oauthUrl from '@/components/oauth/url'
 import oauthCallback from '@/components/oauth/callback'
 import account from '@/components/account'
@@ -17,6 +16,8 @@ import current from '@/components/current'
 import ssqHistoryList from '@/components/ssqHistoryList'
 import fc3dHistoryList from '@/components/fc3dHistoryList'
 import notebook from '@/components/notebook'
+import rank from '@/components/rank'
+import points from '@/components/points'
 import store from '../store'
 
 Vue.use(Router)
@@ -26,6 +27,8 @@ let router = new Router({
   mode: 'history', 
   routes: [
       {path: '/history', name: 'history', component: history },
+      {path: '/points', name: 'points', component: points },
+      {path: '/rank', name: 'rank', component: rank },
       {path: '/notebook', name: 'notebook', component: notebook },
       {path: '/fc3dHistoryList', name: 'fc3dHistoryList', component: fc3dHistoryList },
       {path: '/ssqHistoryList', name: 'ssqHistoryList', component: ssqHistoryList },
@@ -39,7 +42,6 @@ let router = new Router({
       {path: '/account', name: 'account', component: account },
       {path: '/oauth/url', name: 'oauthUrl', component: oauthUrl },
     	{path: '/oauth/callback', name: 'oauthCallback', component: oauthCallback },
-    	{path: '/benefits', name: 'benefits', component: benefits },
     	{path: '/insure', name: 'insure', component: insure },
     	{path: '/', name: 'index', component: index },
    ]

@@ -1,22 +1,87 @@
 <template>
-	<div class="content">
-		<article class="message is-dark">
-		  <div class="message-body">
-		    可用余额 : {{user.account | cent2yuan}} 元
-		  </div>
-		</article>
-		<figure v-if='user.qrcode_ticket'>
-		    <img :src="qrcode_src"/>
+	<nav class="panel">
+		<div class="panel-block has-text-white" style="background: #23d160">
+			<p class="control">	
+				<span class="icon has-text-link">
+					<i class="iconfont icon-account"></i>
+				</span>
+				账户余额 : {{user.account | cent2yuan}} 元 
+				<a class="button is-pulled-right">提现</a>
+			</p>
+		</div>
+		<p class="panel-block" @click='$router.push("rank")'>
+			<span class="icon has-text-info">
+				<i class="iconfont icon-ranking_sponsor_star_hollow"></i>
+			</span>
+			我的等级 : {{user.rank}}
+		</p>
+		<p class="panel-block">
+
+			<span class="icon has-text-danger">
+				<i class="iconfont icon-sum"></i>
+			</span>
+			等级奖励
+		</p>
+		<p class="panel-block" @click='$router.push("points")'>
+			<span class="icon has-text-warning">
+				<i class="iconfont icon-jifen"></i>
+			</span>
+			我的积分 : {{user.points}}
+		</p>
+		<p class="panel-block" @click='switchShowTickets'>
+			<span class="icon has-text-danger">
+				<i class="iconfont icon-hongbao"></i>
+			</span>
+			我的红包明细
+		</p>
+		<div class="panel-block" v-if='showTickets'>
+			<div class="column">
+				<span>可用红包券数：{{ticketsRemain}}</span>
+			</div>
+			<div class="column">
+				<router-link to="/policiesList" class="button is-primary">已用红包券数：{{ticketsUsed}}</router-link>		
+			</div>
+		</div>
+		<p class="panel-block"  @click='$router.push("charge")'>
+			<span class="icon has-text-warning">
+				<i class="iconfont icon-5"></i>
+			</span>
+			会员充值
+		</p>
+		<p class="panel-block" @click='$router.push("notebook")'>
+
+			<span class="icon has-text-success">
+				<i class="iconfont icon-beiwanglu"></i>
+			</span>
+			我的彩票备忘录
+		</p>
+		<p class="panel-block" @click='qrcode'>
+			<span class="icon has-text-black">
+				<i class="iconfont icon-qrcode"></i>
+			</span>
+			推荐二维码
+		</p>
+		<figure class="panel-block" v-if='showQrcodeImg'>
+			<img :src="qrcode_src" style="width: 160px; margin: 0 auto" />
 		</figure>
-		<a v-else class="button" @click='qrcode'>推荐二维码</a>
 	</div>
+
+</nav>
 </template>
 
 <script>
 import store from '../store'
 import {getQrcode} from '../api'
+import { mapGetters } from 'vuex'
 export default {
+	data () {
+		return {
+			showQrcodeImg: false,
+			showTickets: false
+		}
+	},
 	computed: {
+		...mapGetters(['ticketsRemain', 'ticketsUsed']),
 		user () {
 			return store.state.user
 		},
@@ -26,13 +91,21 @@ export default {
 	},
 	filters: {
 		cent2yuan (cent) {
-			cent = cent == 0 ? '000' :cent.toString()
+			cent = !cent ? '000' :cent.toString()
 			return cent.slice(0, -2) + '.' + cent.slice(-2)
 		}
 	},
 	methods: {
 		qrcode () {
-			getQrcode (data => store.commit('setQrcode', data))
+			if (this.user.qrcode_ticket == null) {
+				getQrcode (data => {
+					store.commit('setQrcode', data)
+				})
+			}
+			this.showQrcodeImg = !this.showQrcodeImg
+		},
+		switchShowTickets () {
+			this.showTickets = !this.showTickets
 		}
 	}
 }

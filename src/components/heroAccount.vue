@@ -2,11 +2,16 @@
 	<section class="hero is-primary">
 		<div class="hero-body">
 		    <div class="container has-text-centered">
-		    	<img :src="user.avatar" class="is-30x30">
+		    	<img :src="user.avatar" class="image is-64x64" style="margin:0 auto">
 		      <h2 class="subtitle">
 		        {{ user.name }}
 		      </h2>
+		    <div class="points">
+		    	<p>等级：{{user.rank}}</p>
+		    	<p>积分：{{ user.points }}</p>
 		    </div>
+		    </div>
+
 		  </div>
 	</section>
 </template>
@@ -14,13 +19,18 @@
 <script>
 import store from '../store'
 export default {
-	data() {
-		return {
-			user: store.state.user
+	computed: {
+		user () {
+			return store.state.user
 		}
-	},
-	// created() {
-	// 	console.log(this.user)
-	// }
+	}
 }
 </script>
+
+<style>
+.points {
+	position: absolute;
+	right: 0;
+	top: 1rem;
+}
+</style>
