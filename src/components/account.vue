@@ -15,8 +15,7 @@
 			</span>
 			我的等级 : {{user.rank}}
 		</p>
-		<p class="panel-block">
-
+		<p class="panel-block" @click='$router.push("rank")'>
 			<span class="icon has-text-danger">
 				<i class="iconfont icon-sum"></i>
 			</span>

@@ -41,6 +41,20 @@ export default new Vuex.Store({
 	  setQrcode (state, ticket) {
 	  	state.user.qrcode_ticket = ticket
 	  	localStorage.setItem('user', JSON.stringify(state.user))
+	  },
+	  points2Ticket (state) {
+	  	if (state.user.points >= 200) {
+		  	state.user.points -= 200
+		  	state.user.tickets_qty +=1
+		  	localStorage.setItem('user', JSON.stringify(state.user))
+	  	}
+	  },
+	  rank2Tickets (state) {
+	  	if (state.user.rank_remain >= 1) {
+	  		state.user.rank_remain -= 1
+	  		state.user.tickets_qty +=10
+	  		localStorage.setItem('user', JSON.stringify(state.user))
+	  	}
 	  }
 	}
 })

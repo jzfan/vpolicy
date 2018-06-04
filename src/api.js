@@ -64,6 +64,14 @@ function getQrcode(cb) {
 	axios.post('/qrcodes', {}, authHeader())
 		.then(res => cb(res.data))
 }
+function points2Ticket(cb) {
+	axios.get('/tickets/bypoints', authHeader())
+		.then(res => cb(res.data))
+}
+function rank2Tickets(cb) {
+	axios.get('/tickets/byrank', authHeader())
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -77,5 +85,7 @@ export {
 	getCurrentNotice,
 	getHistoryListByPage,
 	takeHongbao,
-	getQrcode
+	getQrcode,
+	points2Ticket,
+	rank2Tickets
 }
