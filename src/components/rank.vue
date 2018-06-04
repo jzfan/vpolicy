@@ -1,4 +1,6 @@
 <template>
+	<div>
+		
 	<div class="box">
 	    <div class="content">
 		    <dl>
@@ -7,29 +9,28 @@
 		    	<dt>等级奖励</dt>
 		    	<dd>每增加一级可领10张卷</dd>
 		    </dl>
-
+	    </div>
+	</div>
 		    <div class="field is-grouped is-grouped-multiline">
-		      <div class="control">
-		        <div class="tags has-addons">
-		          <a class="tag is-medium is-link">券</a>
-		          <a class="tag">{{user.tickets_qty}}</a>
-		        </div>
-		      </div>
 		    	<div class="control">
 		    	  <div class="tags has-addons">
-		    	    <a class="tag is-medium is-link">等级奖励</a>
-		    	    <a class="tag">{{user.rank_remain}}</a>
+		    	    <a class="tag is-medium">等级奖励</a>
+		    	    <a class="tag is-medium">{{user.rank_remain}}</a>
 		    	  </div>
 		    	</div>
 
 
 		      <div class="control">
-		          <a class="button" @click='getTicket'>领取</a>
+		          <a class="button is-link" @click='getTicket'>领取</a>
 		      </div>
 
 		    </div>
-
-	    </div>
+		    <div class="control">
+		      <div class="tags has-addons">
+		        <a class="tag is-medium">可用红包券</a>
+		        <a class="tag is-medium">{{user.tickets_qty}}</a>
+		      </div>
+		    </div>
 	</div>
 
 </template>

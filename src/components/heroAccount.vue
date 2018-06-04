@@ -2,7 +2,7 @@
 	<section class="hero is-primary">
 		<div class="hero-body">
 		    <div class="container has-text-centered">
-		    	<img :src="user.avatar" class="image is-64x64" style="margin:0 auto">
+		    	<img :src="user.avatar" class="image is-64x64" style="margin:0 auto; border-radius: 50%">
 		      <h2 class="subtitle">
 		        {{ user.name }}
 		      </h2>

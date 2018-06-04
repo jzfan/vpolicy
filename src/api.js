@@ -72,6 +72,10 @@ function rank2Tickets(cb) {
 	axios.get('/tickets/byrank', authHeader())
 		.then(res => cb(res.data))
 }
+function getPointsByDailySignUp(cb) {
+	axios.get('/sign', authHeader())
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -87,5 +91,6 @@ export {
 	takeHongbao,
 	getQrcode,
 	points2Ticket,
-	rank2Tickets
+	rank2Tickets,
+	getPointsByDailySignUp
 }

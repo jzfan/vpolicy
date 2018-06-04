@@ -55,6 +55,11 @@ export default new Vuex.Store({
 	  		state.user.tickets_qty +=10
 	  		localStorage.setItem('user', JSON.stringify(state.user))
 	  	}
+	  },
+	  sign (state) {
+	  	state.user.points += 10
+	  	state.user.signed = true
+	  	localStorage.setItem('user', JSON.stringify(state.user))
 	  }
 	}
 })
