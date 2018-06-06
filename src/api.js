@@ -1,5 +1,6 @@
 import axios from './axios'
 import store from './store'
+import {lotteryChartQueryLimitErrorFlash} from './functions'
 function getExpect(cb) {
 	axios.get('/expects')
 		.then(res => cb(res.data))
@@ -40,9 +41,10 @@ function getTickets(n, cb) {
 			store.commit('increaseTickets', n)
 		})
 }
-function getWinNumberCountByCode(code, n, cb) {
-	axios.get(`/lotteries/count?code=${code}&limit=${n}`)
-		.then(res => cb(res.data))
+function getWinNumberCountByCode(code, n, q, cb) {
+	let url = `/lotteries/count?code=${code}&limit=${n}&q=${q}`
+	axios.get(url)
+		.then(res => cb(res.data)).catch(err => lotteryChartQueryLimitErrorFlash(n, q))
 }
 function getCurrentNotice(cb) {
 	axios.get('/lotteries/current')

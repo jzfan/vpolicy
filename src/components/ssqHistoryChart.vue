@@ -20,8 +20,8 @@ export default {
     }
   },
   methods: {
-    getCount(n) {
-      getWinNumberCountByCode('ssq', n,  (data) => this.setData(data))
+    getCount(n, q) {
+      getWinNumberCountByCode('ssq', n, q, (data) => this.setData(data))
     },
     setData (data) {
       data.blue.sort((a,b) => a.number - b.number)
@@ -49,7 +49,7 @@ export default {
     }
   },
   created () {
-    getWinNumberCountByCode('ssq', 50, (data) => this.setData(data))
+    getWinNumberCountByCode('ssq', 50, 'select', (data) => this.setData(data))
   }
 }
 </script>

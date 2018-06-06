@@ -22,13 +22,13 @@ export default {
     }
   },
   created () {
-    getWinNumberCountByCode('fc3d', 50, (data) => {
+    getWinNumberCountByCode('fc3d', 50, 'select', (data) => {
         this.setAllData(data)
       })
   },
   methods: {
-    getCount(n) {
-      getWinNumberCountByCode('fc3d', n,  (data) => this.setAllData(data))
+    getCount(n, q) {
+      getWinNumberCountByCode('fc3d', n, q, (data) => this.setAllData(data))
     },
     setAllData (data) {
       this.chartDataBai = this.setData(data.bai, '百位')

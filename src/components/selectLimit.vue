@@ -27,12 +27,12 @@ export default {
 		selectLimit (select, event) {
 			document.querySelectorAll("#select-div>a").forEach(a => a.className='button')
 			event.target.className = 'button is-primary'
-			this.$emit("getCount", select)
+			this.$emit("getCount", select, 'select')
 		},
 		inputLimit () {
 			this.limit = Math.ceil(this.limit)
 			if (this.limit > 0) {
-				this.$emit("getCount", this.limit)
+				this.$emit("getCount", this.limit, 'input')
 			}
 		}
 	}
