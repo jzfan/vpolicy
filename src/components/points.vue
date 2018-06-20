@@ -30,7 +30,9 @@
 			</div>
 		</div>
 		<br>
-
+	<div class="tags">
+		<span v-for='(points, index) in points_arr' class="tag" :class="[index >= user.sign_continuly ? '' : 'is-link']">{{points}}</span>
+	</div>
 		<div class="field is-grouped is-grouped-centered">
 		  <p class="control">
 			<a v-if='user.signed' class="button is-static">今日已签到</a>
@@ -46,7 +48,14 @@
 import {points2Ticket, getPointsByDailySignUp} from '../api'
 import store from '../store'
 import {flash} from '../functions'
+import env from '../../.env.js'
+
 export default {
+	data () {
+		return {
+			points_arr: env.SIGNED_POINTS_ARRAY
+		}
+	},
 	computed: {
 		user () {
 			return store.state.user
@@ -54,7 +63,7 @@ export default {
 	},
 	methods: {
 		getTicket () {
-			if (this.user.points >= 200) {
+			if (this.user.points >= env.POINTS_QTY_FOR_TICKET) {
 				points2Ticket(data=> store.commit('points2Ticket'))
 			} else {
 				flash('积分不够')
@@ -62,9 +71,8 @@ export default {
 		},
 		signUp () {
 			getPointsByDailySignUp((data) => {
-				console.log(data)
-				if (data) {
-					store.commit('sign')
+				if (0!=data) {
+					store.commit('sign', data)
 					flash('签到成功')
 					return
 				}

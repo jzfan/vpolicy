@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import env from '../.env.js'
 
 Vue.use(Vuex)
 
@@ -43,8 +44,8 @@ export default new Vuex.Store({
 	  	localStorage.setItem('user', JSON.stringify(state.user))
 	  },
 	  points2Ticket (state) {
-	  	if (state.user.points >= 200) {
-		  	state.user.points -= 200
+	  	if (state.user.points >= env.POINTS_QTY_FOR_TICKET) {
+		  	state.user.points -= env.POINTS_QTY_FOR_TICKET
 		  	state.user.tickets_qty +=1
 		  	localStorage.setItem('user', JSON.stringify(state.user))
 	  	}
@@ -56,9 +57,9 @@ export default new Vuex.Store({
 	  		localStorage.setItem('user', JSON.stringify(state.user))
 	  	}
 	  },
-	  sign (state) {
-	  	state.user.points += 10
-	  	state.user.signed = true
+	  sign (state, user) {
+		user.signed = true
+		state.user = user
 	  	localStorage.setItem('user', JSON.stringify(state.user))
 	  }
 	}
