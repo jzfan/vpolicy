@@ -78,6 +78,10 @@ function getPointsByDailySignUp(cb) {
 	axios.get('/sign', authHeader())
 		.then(res => cb(res.data))
 }
+function order(cb) {
+	axios.get('/wxpay/unify', authHeader())
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -94,5 +98,6 @@ export {
 	getQrcode,
 	points2Ticket,
 	rank2Tickets,
-	getPointsByDailySignUp
+	getPointsByDailySignUp,
+	order
 }
