@@ -110,8 +110,8 @@ export default {
 		},
 		withdraw () {
 			transferToWxBalance(data => {
-				alert(JSON.stringify(data))
-				flash('提现成功')
+				// alert(JSON.stringify(data))
+				data == 'success' ? flash('提现成功') : flash(data)
 			})
 		}
 	}

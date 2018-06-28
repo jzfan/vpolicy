@@ -43,7 +43,7 @@ function getTickets(n, cb) {
 }
 function getWinNumberCountByCode(code, n, q, cb) {
 	let url = `/lotteries/count?code=${code}&limit=${n}&q=${q}`
-	axios.get(url)
+	axios.get(url, authHeader())
 		.then(res => cb(res.data)).catch(err => lotteryChartQueryLimitErrorFlash(n, q))
 }
 function getCurrentNotice(cb) {
