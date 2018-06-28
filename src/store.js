@@ -39,6 +39,9 @@ export default new Vuex.Store({
 	  increaseTickets(state, n) {
 	  	state.user.tickets_qty += n
 	  },
+	  increaseRank(state, n) {
+	  	state.user.rank += n
+	  },
 	  setQrcode (state, ticket) {
 	  	state.user.qrcode_ticket = ticket
 	  	localStorage.setItem('user', JSON.stringify(state.user))

@@ -6,7 +6,7 @@
 					<i class="iconfont icon-account"></i>
 				</span>
 				账户余额 : {{user.account | cent2yuan}} 元 
-				<a class="button is-pulled-right">提现</a>
+				<a class="button is-pulled-right" @click='withdraw'>提现</a>
 			</p>
 		</div>
 		<p class="panel-block" @click='$router.push("rank")'>
@@ -72,6 +72,8 @@
 import store from '../store'
 import {getQrcode} from '../api'
 import { mapGetters } from 'vuex'
+import {transferToWxBalance} from '../api'
+import {flash} from '../functions'
 export default {
 	data () {
 		return {
@@ -105,6 +107,12 @@ export default {
 		},
 		switchShowTickets () {
 			this.showTickets = !this.showTickets
+		},
+		withdraw () {
+			transferToWxBalance(data => {
+				alert(JSON.stringify(data))
+				flash('提现成功')
+			})
 		}
 	}
 }

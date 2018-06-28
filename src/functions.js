@@ -1,4 +1,5 @@
 import bus from './bus'
+import {order} from './api'
 
 function flash(msg)
 {
@@ -26,7 +27,31 @@ function lotteryChartQueryLimitReqiredUserRank(limit, q)
 	return 4
 }
 
+function onBridgeReady(cb){
+   order(data => {
+	   WeixinJSBridge.invoke(
+	       'getBrandWCPayRequest', data,
+	       function(res){
+	       		cb(res.err_msg)
+	       }
+	   ); 
+   })
+}
+function wxJsPay(cb) {
+	if (typeof WeixinJSBridge == "undefined"){
+	   if( document.addEventListener ){
+	       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+	   }else if (document.attachEvent){
+	       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+	       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+	   }
+	}else{
+	   onBridgeReady(cb);
+	}
+}
+
 export {
 	flash,
-	lotteryChartQueryLimitErrorFlash
+	lotteryChartQueryLimitErrorFlash,
+	wxJsPay
 }

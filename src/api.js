@@ -82,6 +82,13 @@ function order(cb) {
 	axios.get('/wxpay/unify', authHeader())
 		.then(res => cb(res.data))
 }
+function checkOrder() {
+	axios.get('/wxpay/check', authHeader())
+}
+function transferToWxBalance(cb) {
+	axios.get('/wxpay/withdraw', authHeader())
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -99,5 +106,7 @@ export {
 	points2Ticket,
 	rank2Tickets,
 	getPointsByDailySignUp,
-	order
+	order,
+	checkOrder,
+	transferToWxBalance
 }
