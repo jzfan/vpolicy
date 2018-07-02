@@ -27,8 +27,8 @@ function lotteryChartQueryLimitReqiredUserRank(limit, q)
 	return 4
 }
 
-function onBridgeReady(cb){
-   order(data => {
+function onBridgeReady(n, cb){
+   order(n, data => {
 	   WeixinJSBridge.invoke(
 	       'getBrandWCPayRequest', data,
 	       function(res){
@@ -37,7 +37,7 @@ function onBridgeReady(cb){
 	   ); 
    })
 }
-function wxJsPay(cb) {
+function wxJsPay(n, cb) {
 	if (typeof WeixinJSBridge == "undefined"){
 	   if( document.addEventListener ){
 	       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -46,7 +46,7 @@ function wxJsPay(cb) {
 	       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
 	   }
 	}else{
-	   onBridgeReady(cb);
+	   onBridgeReady(n, cb);
 	}
 }
 

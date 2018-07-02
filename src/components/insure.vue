@@ -22,7 +22,6 @@
 	  	<a class="button is-primary" @click='insure("ssq")' style="width: 100%">智能预测、激活红包 双色球</a>
 	  	<br>
 	  	<br>
-	  	<a class="button is-danger" @click='getFreeTickets(10)' style="width: 100%">测试领劵</a>
 
 		<goChargeModal v-if='needCharge'></goChargeModal>
 	  	

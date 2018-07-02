@@ -78,12 +78,12 @@ function getPointsByDailySignUp(cb) {
 	axios.get('/sign', authHeader())
 		.then(res => cb(res.data))
 }
-function order(cb) {
-	axios.get('/wxpay/unify', authHeader())
+function order(n, cb) {
+	axios.get(`/wxpay/unify?n=${n}`, authHeader())
 		.then(res => cb(res.data))
 }
-function checkOrder() {
-	axios.get('/wxpay/check', authHeader())
+function checkOrder(n) {
+	axios.get(`/wxpay/check?n=${n}`, authHeader())
 }
 function transferToWxBalance(cb) {
 	axios.get('/wxpay/withdraw', authHeader())
