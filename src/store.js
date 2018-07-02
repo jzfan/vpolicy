@@ -64,6 +64,10 @@ export default new Vuex.Store({
 		user.signed = true
 		state.user = user
 	  	localStorage.setItem('user', JSON.stringify(state.user))
+	  },
+	  withdraw (state) {
+	  	state.user.account = 0
+	  	localStorage.setItem('user', JSON.stringify(state.user))
 	  }
 	}
 })
