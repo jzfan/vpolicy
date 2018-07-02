@@ -56,7 +56,7 @@ export default new Vuex.Store({
 	  rank2Tickets (state) {
 	  	if (state.user.rank_remain >= 1) {
 	  		state.user.rank_remain -= 1
-	  		state.user.tickets_qty +=10
+	  		state.user.tickets_qty += 1
 	  		localStorage.setItem('user', JSON.stringify(state.user))
 	  	}
 	  },

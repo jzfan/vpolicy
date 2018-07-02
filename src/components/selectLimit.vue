@@ -5,7 +5,7 @@
 		<a class="button" @click='selectLimit(200, $event)'>200期</a>
 		<span class="field has-addons">
 		  <span class="control">
-		    <input class="input" type="number" min='1' max="200" v-model.trim.number='limit' placeholder="1-200">
+		    <input class="input" type="number" min='1' max="200" v-model.trim.number='limit' placeholder="任意">
 		  </span>
 		  <span class="control">
 		    <a class="button is-info" @click='inputLimit'>

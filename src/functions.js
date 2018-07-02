@@ -13,18 +13,18 @@ function lotteryChartQueryLimitErrorFlash(limit,  q)
 function lotteryChartQueryLimitReqiredUserRank(limit, q)
 {
 	if (q == 'input') {
-		return 4
+		return 50
 	}
 	if (limit == 50) {
 		return 1
 	}
 	if (limit == 100) {
-		return 2
+		return 10
 	}
 	if (limit == 200) {
-		return 3
+		return 20
 	}
-	return 4
+	return 50
 }
 
 function onBridgeReady(n, cb){
