@@ -65,8 +65,8 @@ export default new Vuex.Store({
 		state.user = user
 	  	localStorage.setItem('user', JSON.stringify(state.user))
 	  },
-	  withdraw (state) {
-	  	state.user.account = 0
+	  setAccount (state, n) {
+	  	state.user.account = n
 	  	localStorage.setItem('user', JSON.stringify(state.user))
 	  }
 	}

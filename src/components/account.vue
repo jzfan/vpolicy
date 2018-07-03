@@ -115,7 +115,7 @@ export default {
 			})
 		},
 		success () {
-			store.commit('withdraw')
+			store.commit('setAccount', 0)
 			flash('提现成功')
 		}
 	}

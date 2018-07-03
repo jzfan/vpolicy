@@ -24,15 +24,11 @@
 import ssqCard from './ssqCard'
 import fc3dCard from './fc3dCard'
 import {takeHongbao} from '../api'
-import bus from '../bus'
+import {flash} from '../functions'
+import store from '../store'
 export default {
 	props: ['policy'],
 	components: {fc3dCard, ssqCard},
-	computed: {
-		hongbaoText () {
-
-		}
-	},
 	methods: {
 		byCode (code) {
 			return code + 'Card'
@@ -41,8 +37,11 @@ export default {
 			return status == 'lose'
 		},
 		take (policy_id) {
-			bus.$emit('flash', '已领红包')
-			takeHongbao(policy_id, (data) => this.policy.status = 'rewarded')
+			takeHongbao(policy_id, (data) => {
+				this.policy.status = 'rewarded'
+				store.commit('setAccount', store.state.user.account + data)
+				flash(`已领红包${data}元`)
+			})
 		}
 	},
 	filters: {

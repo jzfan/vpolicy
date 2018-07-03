@@ -56,11 +56,7 @@ function getHistoryListByPage(code, cb) {
 }
 function takeHongbao(policy_id, cb) {
 	axios.put('/accounts', {policy_id, type: 'increment'}, authHeader())
-		.then(res => {
-			cb(res.data)
-			store.state.user.account += 200
-			localStorage.setItem('user', JSON.stringify(store.state.user))
-		})
+		.then(res => cb(res.data))
 }
 function getQrcode(cb) {
 	axios.post('/qrcodes', {}, authHeader())
