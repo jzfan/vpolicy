@@ -1,5 +1,6 @@
 import axios from './axios'
 import store from './store'
+import {flash} from './functions'
 import {lotteryChartQueryLimitErrorFlash} from './functions'
 function getExpect(cb) {
 	axios.get('/expects')
@@ -25,7 +26,7 @@ function createPolicy(code, number, cb) {
 }
 function activePolicy(code, id, cb) {
 	axios.post(`/policies/${id}/active`, {}, authHeader())
-		.then(res => cb(res.data))
+		.then(res => cb(res.data)).catch(res => flash(res.response.data.message))
 }
 function acceptPrize(id, cb) {
 	axios.patch(`/policies/${id}`, {status: 'rewarded'}, authHeader())

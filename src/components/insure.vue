@@ -32,26 +32,29 @@
 <script>
 import {getTickets} from '../api'
 // import router from '../router'
-import store from '../store'
+import { mapGetters } from 'vuex'
 import goChargeModal from './goChargeModal'
+import {flash} from '../functions'
 export default {
 	components: {goChargeModal},
 	data () {
 		return {
-			user: store.state.user,
 			showDetails: false,
 			needCharge: false
 		}
 	},
+	computed: {
+		...mapGetters(['ticketsRemain']),
+	},
 	methods: {
 		insure(code) {
-			if (store.state.user.tickets_qty > 0) {
-				this.$router.push(`${code}Insure`)
-			} else {
-				// store.commit('selectedCode', code)
-				this.needCharge = true
-				// this.$router.push('charge')
+			let hour = (new Date()).getHours()
+			// let minutes = (new Date()).getMinutes()
+			if (hour == 21) {
+				flash('开奖中..请等待')
+				return
 			}
+			this.ticketsRemain > 0 ? this.$router.push(`${code}Insure`) : this.needCharge = true
 		},
 		getFreeTickets(n) {
 			getTickets(n, (data) => console.log(data))

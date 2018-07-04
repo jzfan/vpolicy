@@ -109,6 +109,9 @@ export default {
 			this.showTickets = !this.showTickets
 		},
 		withdraw () {
+			if (this.user.account < 1000) {
+				flash('10元以上才可提现')
+			}
 			transferToWxBalance(data => {
 				// alert(JSON.stringify(data))
 				data == 'success' ? this.success(n) : flash(data)

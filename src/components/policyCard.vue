@@ -39,7 +39,7 @@ export default {
 		take (policy_id) {
 			takeHongbao(policy_id, (data) => {
 				this.policy.status = 'rewarded'
-				store.commit('setAccount', store.state.user.account + data)
+				store.commit('setAccount', store.state.user.account + data * 100)
 				flash(`已领红包${data}元`)
 			})
 		}
