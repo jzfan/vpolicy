@@ -63,6 +63,18 @@
 		<figure class="panel-block" v-if='showQrcodeImg'>
 			<img :src="qrcode_src" style="width: 160px; margin: 0 auto" />
 		</figure>
+		<p class="panel-block" @click='showIntroduced'>
+			<span class="icon has-text-info">
+				<i class="iconfont icon-account"></i>
+			</span>
+			我的推荐
+		</p>
+		<table class="table is-fullwidth">
+			<tr v-for='person in introduced'>
+				<td>{{person.name}}</td>
+				<td>等级：{{person.rank}}</td>
+			</tr>
+		</table>
 	</div>
 
 </nav>
@@ -72,13 +84,14 @@
 import store from '../store'
 import {getQrcode} from '../api'
 import { mapGetters } from 'vuex'
-import {transferToWxBalance} from '../api'
+import {transferToWxBalance, introduced} from '../api'
 import {flash} from '../functions'
 export default {
 	data () {
 		return {
 			showQrcodeImg: false,
-			showTickets: false
+			showTickets: false,
+			introduced: []
 		}
 	},
 	computed: {
@@ -120,6 +133,9 @@ export default {
 		success () {
 			store.commit('setAccount', 0)
 			flash('提现成功')
+		},
+		showIntroduced () {
+			introduced(data => this.introduced=data)
 		}
 	}
 }

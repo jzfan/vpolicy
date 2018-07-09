@@ -86,6 +86,10 @@ function transferToWxBalance(cb) {
 	axios.get('/wxpay/withdraw', authHeader())
 		.then(res => cb(res.data))
 }
+function introduced(cb) {
+	axios.get('/introduced', authHeader())
+		.then(res => cb(res.data))
+}
 export {
 	createPolicy,
 	activePolicy,
@@ -105,5 +109,6 @@ export {
 	getPointsByDailySignUp,
 	order,
 	checkOrder,
-	transferToWxBalance
+	transferToWxBalance,
+	introduced
 }
